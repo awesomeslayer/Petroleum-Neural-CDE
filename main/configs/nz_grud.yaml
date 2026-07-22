@@ -1,0 +1,23 @@
+# dataset_name: "Petroleum_NZ_Sparse"
+# csv_name: "preprocessed_nz_sparse.csv"
+# data_dir: "./data/"
+# results_dir: "experiment_petroleum_sparse"
+# log_dir: "logs"
+
+# features: ["GR", "DENS", "DTC", "DRHO", "RESS", "RESD", "RESM"]
+# target_col: "CLASS"
+# seq_len: 100
+# add_time: "yes"     # GRU-D нужно знать дельту времени
+# use_mask: "yes"     # Включили маски
+
+# num_epochs: 40
+# batch_size: 128
+# lr: 0.001
+# weight_decay: 0.01
+# hidden_dim: 128
+# tolerances: [0.001]
+# test_noise_robustness: true
+# test_noise_levels: [0.1, 0.3, 0.5]
+
+# experiments_to_run:
+#   grud: true

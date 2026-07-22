@@ -1,0 +1,31 @@
+dataset_name: "Petroleum_NZ"
+csv_name: "preprocessed_nz.csv"
+data_dir: "./data/"
+results_dir: "experiment_petroleum"
+log_dir: "logs"
+runs_dir: "runs"
+
+features: ["GR", "DENS", "DTC", "DRHO", "RESS", "RESD", "RESM"]
+target_col: "CLASS"
+seq_len: 100
+add_time: "no"
+
+num_epochs: 40
+batch_size: 128          
+lr: 0.001                # Вернули нормальный шаг, так как сеть теперь маленькая
+weight_decay: 0.01       # Оставляем жесткий штраф на веса
+hidden_dim: 32           # <--- ГЛАВНОЕ ИЗМЕНЕНИЕ: сжали "мозг" в 4 раза!
+tolerances: [0.001]
+
+experiments_to_run:
+  conv: true
+
+conv_params:
+  kernels: ['gaussian', 'gp']
+  aggregations: ["concat"]
+  kernel_size: 3
+  # Умножится на 100! 
+  # 0.02 = 2 точки (очень резкие детали), 0.05 = 5 точек (мелкие слои)
+  # 0.1 = 10 точек, 0.2 = 20 точек (глобальные тренды)
+  bandwidth_lists_different:
+    - [0.02, 0.05, 0.10, 0.25]

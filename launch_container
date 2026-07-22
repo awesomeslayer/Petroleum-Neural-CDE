@@ -1,0 +1,21 @@
+#!/bin/bash
+source credentials 
+
+echo ">>> Launching container: ${CONTAINER_NAME}..."
+
+
+docker run \
+    -d \
+    --shm-size=20g \
+    --memory=200g \
+    --cpus=24 \
+    --user ${DOCKER_USER_ID}:${DOCKER_GROUP_ID} \
+    --name ${CONTAINER_NAME} \
+    --rm -it --init \
+    --gpus '"device=0,1,2,3,4,5,6"' \
+    --net=host \
+    --mount type=bind,src=${PROJECT_PATH},dst=/app \
+    ${IMAGE_NAME} bash
+
+echo ">>> Container launched. Entering interactive shell..."
+docker exec -it ${CONTAINER_NAME} /bin/bash

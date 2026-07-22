@@ -1,0 +1,33 @@
+dataset_name: "Petroleum_NZ_Sparse"
+csv_name: "preprocessed_nz_sparse.csv"
+data_dir: "./data/"
+results_dir: "experiment_petroleum_sparse"
+log_dir: "logs"
+
+features: ["GR", "DENS", "DTC", "DRHO", "RESS", "RESD", "RESM"]
+target_col: "CLASS"
+seq_len: 100
+add_time: "no"
+
+num_epochs: 10          # Можно оставить 10, работает быстро
+batch_size: 512
+lr: 0.001
+weight_decay: 0.01
+hidden_dim: 128
+tolerances: [0.01]
+
+# ВКЛЮЧАЕМ ВСЕ ФИЧИ ДЛЯ ОТЧЕТА:
+test_noise_robustness: true
+test_noise_levels: [0.1, 0.3, 0.5]
+save_attention_weights: true
+
+experiments_to_run:
+  conv: true
+conv_params:
+  kernels: ['gp']
+  learnable: true
+  aggregations: ["concat"]
+  kernel_size: 3
+  # 5 одинаковых голов с масштабом 1.0 (внутри кода умножится на 100)
+  bandwidth_lists_different:
+    - [1.0, 1.0, 1.0, 1.0, 1.0]

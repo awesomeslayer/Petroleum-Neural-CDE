@@ -1,0 +1,35 @@
+dataset_name: "Petroleum_NZ_Sparse"
+csv_name: "preprocessed_nz_sparse.csv"
+data_dir: "./data/"
+results_dir: "experiment_petroleum_sparse"
+log_dir: "logs"
+
+features: ["GR", "DENS", "DTC", "DRHO", "RESS", "RESD", "RESM"]
+target_col: "CLASS"
+seq_len: 100
+add_time: "no"
+
+num_epochs: 5
+batch_size: 512
+lr: 0.001
+weight_decay: 0.01
+hidden_dim: 128
+tolerances: [0.01]
+
+test_noise_robustness: false
+save_attention_weights: false
+
+experiments_to_run:
+  conv: true
+conv_params:
+  kernels: ['gp']
+  learnable: true
+  aggregations: ["concat"]
+  kernel_size: 3
+  bandwidth_lists_different:
+    - [1.0]
+    - [1.0, 1.0]
+    - [1.0, 1.0, 1.0]
+    - [1.0, 1.0, 1.0, 1.0]
+    - [1.0, 1.0, 1.0, 1.0, 1.0]
+    - [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]

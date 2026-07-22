@@ -1,0 +1,20 @@
+dataset_name: "Petroleum_Norway"
+csv_name: "preprocessed_norway.csv"
+data_dir: "./data/"
+results_dir: "experiment_petroleum"
+log_dir: "logs"
+runs_dir: "runs"
+
+features: ["GR", "DTC", "RHOB", "NPHI", "DTS"] 
+target_col: "CLASS"
+seq_len: 100
+add_time: "no"
+
+num_epochs: 40
+batch_size: 256
+lr: 0.001
+weight_decay: 0.0001
+hidden_dim: 128
+
+experiments_to_run:
+  grud: true

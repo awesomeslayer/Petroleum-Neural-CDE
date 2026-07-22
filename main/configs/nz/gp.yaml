@@ -1,0 +1,24 @@
+dataset_name: "Petroleum_NZ"
+csv_name: "preprocessed_nz.csv"
+data_dir: "./data/"
+results_dir: "experiment_petroleum"
+log_dir: "logs"
+runs_dir: "runs"
+
+features: ["GR", "DENS", "DTC", "DRHO", "RESS", "RESD", "RESM"]
+target_col: "CLASS"
+seq_len: 100
+add_time: "no"
+
+num_epochs: 40
+batch_size: 256
+lr: 0.001
+weight_decay: 0.0001
+hidden_dim: 128
+tolerances: [0.001]
+
+experiments_to_run:
+  gp: true
+gp_params:
+  length_scales: [1.0, 3.0, 5.0] 
+  noise_stds: [0.01, 0.05]
